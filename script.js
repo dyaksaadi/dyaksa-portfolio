@@ -67,7 +67,7 @@ async function fetchGitHubProjects() {
 
     // 1. Fetch repos from dyaksaadi
     try {
-        const resUser = await fetch('https://api.github.com/users/dyaksaadi/repos?sort=updated&per_page=4');
+        const resUser = await fetch('https://api.github.com/users/dyaksaadi/repos?sort=updated&per_page=100');
         if (resUser.ok) {
             const userRepos = await resUser.json();
             allRepos = allRepos.concat(userRepos);
@@ -84,7 +84,8 @@ async function fetchGitHubProjects() {
 
     const customProjects = [{
         name: 'celestial-website',
-        html_url: 'https://velorah-celestial.pages.dev/',
+        html_url: 'https://github.com/dyaksaadi/celestial-website',
+        homepage: 'https://velorah-celestial.pages.dev/',
         description: 'Landing page Celestial yang menampilkan brand dan pengalaman digital modern.',
         language: 'Web',
         stargazers_count: 0,
@@ -112,15 +113,27 @@ async function fetchGitHubProjects() {
         allRepos.forEach((repo, index) => {
             const card = document.createElement('div');
             card.className = 'glass p-8 hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 flex flex-col h-full group relative overflow-hidden';
-            
+            const githubUrl = repo.html_url || repo.github_url || '#';
+            const websiteUrl = repo.homepage || repo.website_url || '';
+            const repoTitle = repo.name || 'Project';
+
             // Subtle hover glow effect
             card.innerHTML = `
                 <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative z-10 flex-grow">
-                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                        <i class="fab fa-github text-2xl text-gray-300 group-hover:text-primary transition-colors"></i>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                            <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub project" class="w-full h-full flex items-center justify-center hover:text-primary transition-colors">
+                                <i class="fab fa-github text-2xl text-gray-300 hover:text-primary transition-colors"></i>
+                            </a>
+                        </div>
+                        ${websiteUrl ? `
+                            <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open project website" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors hover:text-primary">
+                                <i class="fas fa-external-link-alt text-xl text-gray-300"></i>
+                            </a>
+                        ` : ''}
                     </div>
-                    <h3 class="text-2xl font-bold mb-3"><a href="${repo.html_url}" target="_blank" class="hover:text-primary transition-colors focus:outline-none before:absolute before:inset-0">${repo.name}</a></h3>
+                    <h3 class="text-2xl font-bold mb-3"><a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors focus:outline-none">${repoTitle}</a></h3>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3">${repo.description ? repo.description : 'Belum ada deskripsi untuk proyek ini.'}</p>
                 </div>
                 <div class="relative z-10 mt-auto pt-6 border-t border-white/10 flex items-center justify-between text-sm text-gray-400 font-medium">
