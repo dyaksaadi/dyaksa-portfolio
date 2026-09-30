@@ -82,6 +82,17 @@ async function fetchGitHubProjects() {
         'hikam074/basda_sisforklinikhewan'
     ];
 
+    const customProjects = [{
+        name: 'celestial-website',
+        html_url: 'https://velorah-celestial.pages.dev/',
+        description: 'Landing page Celestial yang menampilkan brand dan pengalaman digital modern.',
+        language: 'Web',
+        stargazers_count: 0,
+        forks_count: 0
+    }];
+
+    allRepos = customProjects.concat(allRepos);
+
     for (const repoName of extraRepos) {
         try {
             const resRepo = await fetch(`https://api.github.com/repos/${repoName}`);
@@ -117,8 +128,8 @@ async function fetchGitHubProjects() {
                         ${repo.language ? `<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span>${repo.language}</span>` : ''}
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="flex items-center gap-1 hover:text-yellow-400 transition-colors"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
-                        <span class="flex items-center gap-1 hover:text-blue-400 transition-colors"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                        <span class="flex items-center gap-1 hover:text-yellow-400 transition-colors"><i class="fas fa-star"></i> ${(repo.stargazers_count ?? 0)}</span>
+                        <span class="flex items-center gap-1 hover:text-blue-400 transition-colors"><i class="fas fa-code-branch"></i> ${(repo.forks_count ?? 0)}</span>
                     </div>
                 </div>
             `;
