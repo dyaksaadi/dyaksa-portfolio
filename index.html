@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyaksa Adi Pradana | Portofolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: { primary: '#00ffcc', dark: '#050505' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-white antialiased selection:bg-primary selection:text-black font-sans">
+    
+    <!-- Video Backgrounds -->
+    <canvas id="hero-blurred"></canvas>
+    <canvas id="hero-lightpass"></canvas>
+    
+    <!-- Dark Gradient Overlay for Contrast & Blending -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] bg-gradient-to-t from-black via-black/30 to-black/30"></div>
+    <!-- Soft vignette to hide hard edges of the contain video -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]"></div>
+
+    <!-- Ultra Minimal Navbar -->
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 px-6 md:px-8 py-3 md:py-4 rounded-full w-[92%] max-w-4xl flex justify-between items-center glass-nav">
+        <div class="text-xl font-extrabold tracking-widest text-white drop-shadow-md">DYAKSA.</div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-8 font-medium text-sm text-gray-200">
+            <a href="#home" class="hover:text-primary transition-colors">Beranda</a>
+            <a href="#about" class="hover:text-primary transition-colors">Tentang</a>
+            <a href="#skills" class="hover:text-primary transition-colors">Keahlian</a>
+            <a href="#projects" class="hover:text-primary transition-colors">Proyek</a>
+        </div>
+        <a href="#contact" class="hidden md:inline-block bg-white text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-primary transition-colors">Kontak</a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none p-1">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 text-2xl font-bold transition-all duration-300 opacity-0 pointer-events-none">
+        <a href="#home" class="mobile-link text-white hover:text-primary transition-colors">Beranda</a>
+        <a href="#about" class="mobile-link text-white hover:text-primary transition-colors">Tentang</a>
+        <a href="#skills" class="mobile-link text-white hover:text-primary transition-colors">Keahlian</a>
+        <a href="#projects" class="mobile-link text-white hover:text-primary transition-colors">Proyek</a>
+        <a href="#contact" class="mobile-link text-primary border-b-2 border-primary pb-1">Kontak</a>
+    </div>
+
+    <!-- Centered, Spacious Content Layout -->
+    <main class="relative z-10 w-full flex flex-col items-center px-6">
+        
+        <!-- Hero Section: Moved text to the BOTTOM to keep face visible -->
+        <section id="home" class="min-h-screen w-full flex items-end justify-center pb-24 md:pb-32">
+            <div class="text-center max-w-5xl w-full" data-aos="fade-up" data-aos-duration="1500">
+                <p class="text-primary font-semibold tracking-widest uppercase mb-4 text-xs md:text-sm drop-shadow-md">Portofolio</p>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight tracking-tighter drop-shadow-2xl">
+                    Dyaksa Adi Pradana
+                </h1>
+                <p class="text-gray-200 text-lg md:text-xl mb-8 font-light drop-shadow-lg max-w-2xl mx-auto">Mahasiswa Sistem Informasi dan pengembang web</p>
+                <a href="#about" class="glass-btn px-8 py-3 rounded-full font-bold text-sm transition-all duration-300">
+                    Kenali Saya <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen w-full flex items-center justify-center py-20">
+            <div class="glass p-10 md:p-16 max-w-4xl w-full text-center" data-aos="fade-up" data-aos-duration="1000">
+                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-white to-gray-400 flex items-center justify-center mb-8 shadow-xl">
+                    <i class="fas fa-user text-2xl text-black"></i>
+                </div>
+                <h2 class="text-4xl font-bold mb-8 drop-shadow-lg">Tentang Saya</h2>
+                <p class="text-gray-100 leading-relaxed text-lg md:text-xl mb-10 font-light drop-shadow-md">
+                    Saya mahasiswa Sistem Informasi di <span class="font-bold text-white">Universitas Jember</span>. Saya tertarik pada pengembangan perangkat lunak dan web, serta senang membuat solusi digital yang bermanfaat.
+                </p>
+                <div class="inline-block border border-white/20 bg-black/40 backdrop-blur-md px-8 py-4 rounded-2xl shadow-xl">
+                    <p class="text-primary font-bold text-lg mb-1">S1 Sistem Informasi</p>
+                    <p class="text-gray-300 font-medium text-sm">2023 – sekarang</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="min-h-screen w-full flex items-center justify-center py-20">
+            <div class="max-w-5xl w-full text-center" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 drop-shadow-xl">Keahlian</h2>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="glass-skill group"><i class="fas fa-network-wired text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Sistem Informasi</span></div>
+                    <div class="glass-skill group"><i class="fas fa-code text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Pemrograman</span></div>
+                    <div class="glass-skill group"><i class="fas fa-globe text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Pengembangan Web</span></div>
+                    <div class="glass-skill group"><i class="fas fa-database text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Basis Data</span></div>
+                    <div class="glass-skill group"><i class="fas fa-lightbulb text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Pemecahan Masalah</span></div>
+                    <div class="glass-skill group"><i class="fas fa-chart-line text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Analisis</span></div>
+                    <div class="glass-skill group"><i class="fas fa-users text-3xl mb-3 group-hover:text-primary transition-colors"></i><span class="font-medium text-sm text-gray-200">Kerja Tim</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="min-h-screen w-full flex flex-col justify-center items-center py-20">
+            <div class="max-w-6xl w-full text-center mb-12" data-aos="fade-down">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-xl">Proyek</h2>
+                <p class="text-gray-300 text-lg font-light drop-shadow-md">Beberapa proyek yang pernah saya kerjakan.</p>
+            </div>
+            <div id="github-projects" class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- JS Inject -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen w-full flex items-center justify-center py-20">
+            <div class="glass p-10 md:p-16 max-w-4xl w-full text-center relative overflow-hidden" data-aos="zoom-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">Mari Terhubung</h2>
+                <p class="text-gray-300 mb-12 text-lg font-light max-w-xl mx-auto drop-shadow-md">Saya terbuka untuk berdiskusi, berkolaborasi, dan mengenal peluang baru.</p>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-12 relative z-10">
+                    <a href="mailto:dyaksaadi123@gmail.com" class="social-btn" target="_blank"><i class="fas fa-envelope"></i></a>
+                    <a href="https://instagram.com/dyaksaadi___" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/dyaksaadi" class="social-btn" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/dyaksa-adi-pradana-0b6a9430a" class="social-btn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+                <p class="text-gray-300 font-medium text-sm tracking-wide bg-black/40 backdrop-blur-md inline-block px-6 py-3 rounded-full border border-white/10 shadow-lg">
+                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> Jember, Indonesia &nbsp;|&nbsp; <i class="fas fa-phone-alt text-primary mr-2 ml-4"></i> 085156670747
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
