@@ -82,17 +82,20 @@ async function fetchGitHubProjects() {
         'hikam074/basda_sisforklinikhewan'
     ];
 
-    const customProjects = [{
-        name: 'celestial-website',
-        html_url: 'https://github.com/dyaksaadi/celestial-website',
-        homepage: 'https://velorah-celestial.pages.dev/',
-        description: 'Landing page Celestial yang menampilkan brand dan pengalaman digital modern.',
-        language: 'Web',
-        stargazers_count: 0,
-        forks_count: 0
-    }];
-
-    allRepos = customProjects.concat(allRepos);
+    const hiddenProjectNames = new Set(['sneaker', 'celestial-website']);
+    const hiddenProjectUrls = new Set([
+        'https://github.com/dyaksaadi/sneaker',
+        'https://github.com/dyaksaadi/celestial-website',
+        'https://velorah-celestial.pages.dev'
+    ]);
+    allRepos = allRepos.filter(repo => {
+        const repoName = (repo.name || '').toLowerCase();
+        const projectUrls = [repo.html_url, repo.github_url, repo.homepage, repo.website_url]
+            .filter(Boolean)
+            .map(url => url.replace(/\/+$/, '').toLowerCase());
+        return !hiddenProjectNames.has(repoName) &&
+            !projectUrls.some(url => hiddenProjectUrls.has(url));
+    });
 
     for (const repoName of extraRepos) {
         try {
